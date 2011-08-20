@@ -23,7 +23,9 @@
 
 @implementation PasscodeViewController
 
-@synthesize navBar, navItem, hiddenEntryField, containingView, slideOutImageView, promptLabel, delaySpinner, digit1, digit2, digit3, digit4, failureLabel, mismatchLabel, passcodeDelegate, newPasscode;
+@synthesize navBar, navItem, hiddenEntryField, containingView, slideOutImageView, promptLabel,
+  delaySpinner, digit1, digit2, digit3, digit4, failureLabel, mismatchLabel, passcodeDelegate,
+  newPasscode;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -48,12 +50,16 @@
   NSInteger attempts = [PasscodeViewController failedAttempts];
   failureLabel.hidden = (attempts == 0);
   if (attempts > 0) {
-    NSString *failureText = [NSString stringWithFormat:@"%i Failed Passcode Attempt%@", attempts, (attempts > 1 ? @"s" : @"")];
+    NSString *failureText = [NSString stringWithFormat:@"%i Failed Passcode Attempt%@", 
+                             attempts, (attempts > 1 ? @"s" : @"")];
     [failureLabel setTitle:failureText forState:UIControlStateNormal];
     UIImage *bgImage = [UIImage imageNamed:@"passcodeFailedBackground.png"];
-    [failureLabel setBackgroundImage:[bgImage stretchableImageWithLeftCapWidth:13.0 topCapHeight:13.0] forState:UIControlStateNormal];
+    [failureLabel setBackgroundImage:
+      [bgImage stretchableImageWithLeftCapWidth:13.0 topCapHeight:13.0]
+      forState:UIControlStateNormal];
     CGRect frame = failureLabel.frame;
-    frame.size = CGSizeMake([failureText sizeWithFont:failureLabel.titleLabel.font].width + 35, bgImage.size.height);
+    frame.size = CGSizeMake([failureText sizeWithFont:failureLabel.titleLabel.font].width + 35,
+                            bgImage.size.height);
     failureLabel.frame = frame;
     failureLabel.center = CGPointMake(320.0 * 0.5, failureLabel.center.y);
   }
@@ -68,7 +74,8 @@
                           state == PasscodeDisplayStateChangeEnterNew2 ? @"Re-enter" : @"Enter",
                           state == PasscodeDisplayStateChangeEnterOld  ? @"old" : @"new"];
     else
-      promptLabel.text = state == PasscodeDisplayStateChangeEnterNew1 ? @"Enter a passcode" : @"Re-enter your passcode";
+      promptLabel.text = state == PasscodeDisplayStateChangeEnterNew1 ? @"Enter a passcode" : 
+                                                                        @"Re-enter your passcode";
   }
   
   if (sliding) {
@@ -99,9 +106,11 @@
 }
 
 - (IBAction)cancelled {
-  if (state == PasscodeDisplayStateChallenge && [passcodeDelegate respondsToSelector:@selector(passcodeChallengeCancelled)]) 
+  if (state == PasscodeDisplayStateChallenge && 
+      [passcodeDelegate respondsToSelector:@selector(passcodeChallengeCancelled)]) 
     [passcodeDelegate passcodeChallengeCancelled];
-  if (state != PasscodeDisplayStateChallenge && [passcodeDelegate respondsToSelector:@selector(passcodeSetCancelled)]) 
+  if (state != PasscodeDisplayStateChallenge && 
+      [passcodeDelegate respondsToSelector:@selector(passcodeSetCancelled)]) 
     [passcodeDelegate passcodeSetCancelled];
   [self dismiss];
 }
@@ -156,7 +165,9 @@
       BOOL passcodeMatches = [hiddenEntryField.text isEqual:newPasscode];
       if (passcodeMatches) {
         [PasscodeViewController setPasscode:newPasscode];
-        [self performSelector:@selector(setSucceeded) withObject:nil afterDelay:kPasscodeEntryPause];
+        [self performSelector:@selector(setSucceeded) 
+                   withObject:nil 
+                   afterDelay:kPasscodeEntryPause];
         return;  // skip display reconfiguration at end of method
       } else {
         mismatch = YES;
@@ -185,7 +196,8 @@
 
 - (void)setWithDelegate:(NSObject *)aDelegate parentViewController:(UIViewController *)pvc {
   passcodeDelegate = aDelegate;
-  state = [PasscodeViewController passcode] ? PasscodeDisplayStateChangeEnterOld : PasscodeDisplayStateChangeEnterNew1;
+  state = [PasscodeViewController passcode] ? PasscodeDisplayStateChangeEnterOld : 
+                                              PasscodeDisplayStateChangeEnterNew1;
   [pvc presentModalViewController:self animated:YES];
 }
 
