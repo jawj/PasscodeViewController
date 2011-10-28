@@ -1,4 +1,6 @@
 
+!!
+
 This is a passcode view controller that you're free to use in your own iPhone apps. I developed it for use in the "mappiness":http://www.mappiness.org.uk/ app. 
 
 *You can see it in action by "downloading the free app":http://itunes.apple.com/gb/app/mappiness/id385082965?mt=8 (and signing up), or by checking out this "short screencast":http://blog.mackerron.com/2011/07/passcode-view-controller/.*
@@ -14,8 +16,7 @@ The controller can be used as follows.
 
 h3. .h
 
-<pre><code>
-  #import "PasscodeViewController.h"
+<pre><code>  #import "PasscodeViewController.h"
 
   typedef enum {
     PasscodeChallengeReasonProtectedAction,
@@ -31,8 +32,7 @@ h3. .h
 
 h3. .m
 
-<pre><code>
-  // PasscodeProtectedCellController delegate
+<pre><code>  // PasscodeProtectedCellController delegate
 
   - (void)doProtectedAction {
     challengeReason = PasscodeChallengeReasonProtectedAction;
@@ -51,11 +51,11 @@ h3. .m
                                    destructiveButtonTitle:nil 
                                         otherButtonTitles:@"Change Passcode", @"Turn Passcode off", nil];
   
-    else as = [[UIActionSheet alloc] initWithTitle:sheetTitle
-                                          delegate:self
-                                 cancelButtonTitle:cancelLabel
-                            destructiveButtonTitle:nil 
-                                 otherButtonTitles:@"Turn Passcode on", nil];
+    else        as = [[UIActionSheet alloc] initWithTitle:sheetTitle
+                                                 delegate:self
+                                        cancelButtonTitle:cancelLabel
+                                   destructiveButtonTitle:nil 
+                                        otherButtonTitles:@"Turn Passcode on", nil];
   
     [as showInView:self.view];  // might alternatively be self.tableView
     [as release];
@@ -92,7 +92,7 @@ h3. .m
 </pre></code>
 
 
-Notes:
+h3. Notes
 
 * All public-facing methods are class methods. These deal with allocating an instance and releasing it when finished.
 * If a challenge is requested when no passcode is set, no prompt is shown and the passcodeChallengeSucceeded delegate method is called immediately. 
