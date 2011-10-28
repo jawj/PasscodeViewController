@@ -1,9 +1,9 @@
 //
-//  PasscodeViewController.m
-//  mappiness
+//  PasscodeViewController.h
+//  https://github.com/jawj/PasscodeViewController
 //
-//  Created by George MacKerron on 02/01/2011.
-//  Copyright 2011 George MacKerron. All rights reserved.
+//  Copyright (c) 2011 George MacKerron
+//  Released under the MIT licence: http://opensource.org/licenses/mit-license
 //
 
 #import "PasscodeViewController.h"

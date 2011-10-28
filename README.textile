@@ -1,0 +1,113 @@
+
+This is a passcode view controller that you're free to use in your own iPhone apps.
+
+I developed it for use in the "mappiness":http://www.mappiness.org.uk/ app. You can see it in action by downloading (and signing up to) that app. Or you can check out this "short screencast":http://blog.mackerron.com/2011/07/passcode-view-controller/.
+
+Appearance and behaviour is modelled very closely on the Apple original, in Settings &gt; General &gt; Passcode Lock. But there are a couple of tasteful (and optional) enhancements:
+
+#. An incorrect passcode causes the entry screen to shake/shiver a little, just like the Mac OS X log-in dialogue does.
+#. You can set an increasing delay period after several incorrect passcode attempts, to slow down anyone who's just guessing.
+
+h2. Example usage
+
+The controller can be used as follows.
+
+h3. .h
+
+bc..
+#import "PasscodeViewController.h"
+
+typedef enum {
+  PasscodeChallengeReasonProtectedAction,
+  PasscodeChallengeReasonTurnOffPasscode
+} PasscodeChallengeReason;
+
+@interface MyController : SomeViewController <UIActionSheetDelegate, PasscodeViewControllerDelegate> {
+  PasscodeChallengeReason challengeReason;
+}
+
+@end
+
+
+h3. .m
+
+bc..
+// PasscodeProtectedCellController delegate
+
+- (void)doProtectedAction {
+  challengeReason = PasscodeChallengeReasonProtectedAction;
+  [PasscodeViewController challengeWithDelegate:self parentViewController:self];
+}
+
+- (void)showPasscodeOptions {
+  BOOL locked = !! [PasscodeViewController passcode];
+  UIActionSheet *as;
+  NSString *sheetTitle = @"Control access to (protected action)";
+  NSString *cancelLabel = @"Cancel";
+  
+  if (locked) as = [[UIActionSheet alloc] initWithTitle:sheetTitle
+                                               delegate:self
+                                      cancelButtonTitle:cancelLabel
+                                 destructiveButtonTitle:nil 
+                                      otherButtonTitles:@"Change Passcode", @"Turn Passcode off", nil];
+  
+  else as = [[UIActionSheet alloc] initWithTitle:sheetTitle
+                                        delegate:self
+                               cancelButtonTitle:cancelLabel
+                          destructiveButtonTitle:nil 
+                               otherButtonTitles:@"Turn Passcode on", nil];
+  
+  [as showInView:self.view];  // might alternatively be self.tableView
+  [as release];
+}
+
+// UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 0)  // i.e. 'Turn Passcode on' or 'Change Passcode'
+    [PasscodeViewController setWithDelegate:self parentViewController:self];
+    
+  else {  // must be 'Turn Passcode off'
+    challengeReason = PasscodeChallengeReasonTurnOffPasscode;
+    [PasscodeViewController challengeWithDelegate:self parentViewController:self];
+  }
+}
+
+// PasscodeViewController delegate
+
+- (void)passcodeChallengeSucceeded {
+  if (challengeReason == PasscodeChallengeReasonProtectedAction) {
+    // do the passcode-protected action
+    
+  } else {  // by elimination, we know that challengeReason == PasscodeChallengeReasonTurnOffPasscode
+    // so turn the passcode off...
+    [PasscodeViewController clear];
+    // ...and now do any necessary display changes to indicate that a passcode is no longer set
+  }
+}
+
+- (void)passcodeSetSucceeded {
+  // do any necessary display changes to indicate that a passcode is set
+}
+
+
+Notes:
+
+* All public-facing methods are class methods. These deal with allocating an instance and releasing it when finished.
+* If a challenge is requested when no passcode is set, no prompt is shown and the passcodeChallengeSucceeded delegate method is called immediately. 
+
+
+h2. Suggested enhancements
+
+These things are all currently missing:
+
+* Support for iPad
+* Support for localisation (using a .strings file)
+* Localisations
+* More/better documentation
+
+
+h2. Licence
+
+This software is released under the "MIT licence":http://www.opensource.org/licenses/mit-license.php.
+
