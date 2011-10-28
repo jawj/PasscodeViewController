@@ -8,6 +8,9 @@ Appearance and behaviour is modelled very closely on the Apple original (in Sett
 # An incorrect passcode causes the entry screen to shake/shiver a little, just like the Mac OS X log-in dialogue does.
 # You can set an increasing delay period after several incorrect passcode attempts, to slow down anyone who's just guessing.
 
+
+h2. Screenshot
+
 !http://blog.mackerron.com/wp-content/uploads/2011/10/photo.png(PasscodeViewController screenshot)!
 
 
