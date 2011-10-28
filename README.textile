@@ -1,7 +1,7 @@
 
 This is a passcode view controller that you're free to use in your own iPhone apps. I developed it for "mappiness":http://www.mappiness.org.uk/. 
 
-*See it in action by "downloading the free app":http://itunes.apple.com/gb/app/mappiness/id385082965?mt=8 -- and signing up -- or by checking out this "short screencast":http://blog.mackerron.com/2011/07/passcode-view-controller/.*
+*See it in action by "downloading the free app":http://itunes.apple.com/gb/app/mappiness/id385082965?mt=8 -- and signing up -- or by checking out this "short screencast":http://blog.mackerron.com/2011/10/passcode-view-controller/.*
 
 Appearance and behaviour is modelled very closely on the Apple original (in Settings &gt; General &gt; Passcode Lock), but there are a couple of optional, tasteful enhancements:
 
