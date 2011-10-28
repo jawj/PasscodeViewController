@@ -1,7 +1,7 @@
 
-This is a passcode view controller that you're free to use in your own iPhone apps.
+This is a passcode view controller that you're free to use in your own iPhone apps. I developed it for use in the "mappiness":http://www.mappiness.org.uk/ app. 
 
-I developed it for use in the "mappiness":http://www.mappiness.org.uk/ app. You can see it in action by downloading (and signing up to) that app. Or you can check out this "short screencast":http://blog.mackerron.com/2011/07/passcode-view-controller/.
+*You can see it in action by "downloading the free app":http://itunes.apple.com/gb/app/mappiness/id385082965?mt=8 (and signing up), or by checking out this "short screencast":http://blog.mackerron.com/2011/07/passcode-view-controller/.*
 
 Appearance and behaviour is modelled very closely on the Apple original, in Settings &gt; General &gt; Passcode Lock. But there are a couple of tasteful (and optional) enhancements:
 
@@ -14,7 +14,7 @@ The controller can be used as follows.
 
 h3. .h
 
-bc..
+<code>
 #import "PasscodeViewController.h"
 
 typedef enum {
@@ -27,11 +27,11 @@ typedef enum {
 }
 
 @end
-
+</code>
 
 h3. .m
 
-bc..
+<code>
 // PasscodeProtectedCellController delegate
 
 - (void)doProtectedAction {
@@ -89,6 +89,7 @@ bc..
 - (void)passcodeSetSucceeded {
   // do any necessary display changes to indicate that a passcode is set
 }
+</code>
 
 
 Notes:
