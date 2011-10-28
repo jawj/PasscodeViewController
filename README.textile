@@ -14,82 +14,82 @@ The controller can be used as follows.
 
 h3. .h
 
-<code>
-#import "PasscodeViewController.h"
+<pre><code>
+  #import "PasscodeViewController.h"
 
-typedef enum {
-  PasscodeChallengeReasonProtectedAction,
-  PasscodeChallengeReasonTurnOffPasscode
-} PasscodeChallengeReason;
+  typedef enum {
+    PasscodeChallengeReasonProtectedAction,
+    PasscodeChallengeReasonTurnOffPasscode
+  } PasscodeChallengeReason;
 
-@interface MyController : SomeViewController <UIActionSheetDelegate, PasscodeViewControllerDelegate> {
-  PasscodeChallengeReason challengeReason;
-}
+  @interface MyController : SomeViewController <UIActionSheetDelegate, PasscodeViewControllerDelegate> {
+    PasscodeChallengeReason challengeReason;
+  }
 
-@end
-</code>
+  @end
+</pre></code>
 
 h3. .m
 
-<code>
-// PasscodeProtectedCellController delegate
+<pre><code>
+  // PasscodeProtectedCellController delegate
 
-- (void)doProtectedAction {
-  challengeReason = PasscodeChallengeReasonProtectedAction;
-  [PasscodeViewController challengeWithDelegate:self parentViewController:self];
-}
-
-- (void)showPasscodeOptions {
-  BOOL locked = !! [PasscodeViewController passcode];
-  UIActionSheet *as;
-  NSString *sheetTitle = @"Control access to (protected action)";
-  NSString *cancelLabel = @"Cancel";
-  
-  if (locked) as = [[UIActionSheet alloc] initWithTitle:sheetTitle
-                                               delegate:self
-                                      cancelButtonTitle:cancelLabel
-                                 destructiveButtonTitle:nil 
-                                      otherButtonTitles:@"Change Passcode", @"Turn Passcode off", nil];
-  
-  else as = [[UIActionSheet alloc] initWithTitle:sheetTitle
-                                        delegate:self
-                               cancelButtonTitle:cancelLabel
-                          destructiveButtonTitle:nil 
-                               otherButtonTitles:@"Turn Passcode on", nil];
-  
-  [as showInView:self.view];  // might alternatively be self.tableView
-  [as release];
-}
-
-// UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == 0)  // i.e. 'Turn Passcode on' or 'Change Passcode'
-    [PasscodeViewController setWithDelegate:self parentViewController:self];
-    
-  else {  // must be 'Turn Passcode off'
-    challengeReason = PasscodeChallengeReasonTurnOffPasscode;
+  - (void)doProtectedAction {
+    challengeReason = PasscodeChallengeReasonProtectedAction;
     [PasscodeViewController challengeWithDelegate:self parentViewController:self];
   }
-}
 
-// PasscodeViewController delegate
-
-- (void)passcodeChallengeSucceeded {
-  if (challengeReason == PasscodeChallengeReasonProtectedAction) {
-    // do the passcode-protected action
-    
-  } else {  // by elimination, we know that challengeReason == PasscodeChallengeReasonTurnOffPasscode
-    // so turn the passcode off...
-    [PasscodeViewController clear];
-    // ...and now do any necessary display changes to indicate that a passcode is no longer set
+  - (void)showPasscodeOptions {
+    BOOL locked = !! [PasscodeViewController passcode];
+    UIActionSheet *as;
+    NSString *sheetTitle = @"Control access to (protected action)";
+    NSString *cancelLabel = @"Cancel";
+  
+    if (locked) as = [[UIActionSheet alloc] initWithTitle:sheetTitle
+                                                 delegate:self
+                                        cancelButtonTitle:cancelLabel
+                                   destructiveButtonTitle:nil 
+                                        otherButtonTitles:@"Change Passcode", @"Turn Passcode off", nil];
+  
+    else as = [[UIActionSheet alloc] initWithTitle:sheetTitle
+                                          delegate:self
+                                 cancelButtonTitle:cancelLabel
+                            destructiveButtonTitle:nil 
+                                 otherButtonTitles:@"Turn Passcode on", nil];
+  
+    [as showInView:self.view];  // might alternatively be self.tableView
+    [as release];
   }
-}
 
-- (void)passcodeSetSucceeded {
-  // do any necessary display changes to indicate that a passcode is set
-}
-</code>
+  // UIActionSheetDelegate
+
+  - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0)  // i.e. 'Turn Passcode on' or 'Change Passcode'
+      [PasscodeViewController setWithDelegate:self parentViewController:self];
+    
+    else {  // must be 'Turn Passcode off'
+      challengeReason = PasscodeChallengeReasonTurnOffPasscode;
+      [PasscodeViewController challengeWithDelegate:self parentViewController:self];
+    }
+  }
+
+  // PasscodeViewController delegate
+
+  - (void)passcodeChallengeSucceeded {
+    if (challengeReason == PasscodeChallengeReasonProtectedAction) {
+      // do the passcode-protected action
+    
+    } else {  // by elimination, we know that challengeReason == PasscodeChallengeReasonTurnOffPasscode
+      // so turn the passcode off...
+      [PasscodeViewController clear];
+      // ...and now do any necessary display changes to indicate that a passcode is no longer set
+    }
+  }
+
+  - (void)passcodeSetSucceeded {
+    // do any necessary display changes to indicate that a passcode is set
+  }
+</pre></code>
 
 
 Notes:
