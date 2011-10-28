@@ -110,7 +110,7 @@ These things are all currently missing:
 * Support for localisation (using a @.strings@ file)
 * Localisations
 * More/better documentation!
-* Consistent use of Title Case (I hate title case. But I want to do what Apple would do. This is probably the leading cause of mental anguish when I do iOS development.)
+* Consistent use of Title Case (I hate title case. But I Want To Do What Apple Would Do. This is probably the leading cause of mental anguish when I do iOS development.)
 
 
 h2. Licence
