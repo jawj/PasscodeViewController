@@ -1,5 +1,5 @@
 
-!{border: 1px solid #000}http://blog.mackerron.com/wp-content/uploads/2011/10/photo.png(PasscodeViewController screenshot)!
+!>http://blog.mackerron.com/wp-content/uploads/2011/10/photo.png(PasscodeViewController screenshot)!
 
 This is a passcode view controller that you're free to use in your own iPhone apps. I developed it for use in the "mappiness":http://www.mappiness.org.uk/ app. 
 
@@ -7,8 +7,8 @@ This is a passcode view controller that you're free to use in your own iPhone ap
 
 Appearance and behaviour is modelled very closely on the Apple original, in Settings &gt; General &gt; Passcode Lock. But there are a couple of tasteful (and optional) enhancements:
 
-#. An incorrect passcode causes the entry screen to shake/shiver a little, just like the Mac OS X log-in dialogue does.
-#. You can set an increasing delay period after several incorrect passcode attempts, to slow down anyone who's just guessing.
+# An incorrect passcode causes the entry screen to shake/shiver a little, just like the Mac OS X log-in dialogue does.
+# You can set an increasing delay period after several incorrect passcode attempts, to slow down anyone who's just guessing.
 
 h2. Example usage
 
