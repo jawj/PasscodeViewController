@@ -58,7 +58,7 @@ typedef enum {
   BOOL ignoringInput;
   BOOL mismatch;
   NSObject <PasscodeViewControllerDelegate> *passcodeDelegate;
-  NSString *newPasscode;
+  NSString *theNewPasscode;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
@@ -76,7 +76,7 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UILabel *mismatchLabel;
 
 @property (nonatomic, assign) NSObject *passcodeDelegate;
-@property (nonatomic, retain) NSString *newPasscode;
+@property (nonatomic, retain) NSString *theNewPasscode;
 
 - (IBAction)passcodeChanged;
 - (IBAction)cancelled;

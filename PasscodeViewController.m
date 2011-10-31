@@ -25,7 +25,7 @@
 
 @synthesize navBar, navItem, hiddenEntryField, containingView, slideOutImageView, promptLabel,
   delaySpinner, digit1, digit2, digit3, digit4, failureLabel, mismatchLabel, passcodeDelegate,
-  newPasscode;
+  theNewPasscode;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -156,15 +156,15 @@
       return;  // skip display reconfiguration at end of method
       
     case PasscodeDisplayStateChangeEnterNew1:
-      self.newPasscode = hiddenEntryField.text;
+      self.theNewPasscode = hiddenEntryField.text;
       state = PasscodeDisplayStateChangeEnterNew2;
       break;
       
     case PasscodeDisplayStateChangeEnterNew2:
       ;  // no-op weirdly seems required here to avoid syntax complaint with LLVM
-      BOOL passcodeMatches = [hiddenEntryField.text isEqual:newPasscode];
+      BOOL passcodeMatches = [hiddenEntryField.text isEqual:theNewPasscode];
       if (passcodeMatches) {
-        [PasscodeViewController setPasscode:newPasscode];
+        [PasscodeViewController setPasscode:theNewPasscode];
         [self performSelector:@selector(setSucceeded) 
                    withObject:nil 
                    afterDelay:kPasscodeEntryPause];
@@ -268,7 +268,7 @@
   self.digit4 = nil;
   self.failureLabel = nil;
   self.mismatchLabel = nil;
-  self.newPasscode = nil;
+  self.theNewPasscode = nil;
   [super dealloc];
 }
 
