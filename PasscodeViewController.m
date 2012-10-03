@@ -41,6 +41,7 @@
   
   ignoringInput = NO;
   hiddenEntryField.text = @"";
+  [self passcodeChanged];  // clear the four * images
   [hiddenEntryField becomeFirstResponder];
   
   [delaySpinner stopAnimating];
